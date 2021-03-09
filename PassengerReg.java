@@ -5,7 +5,7 @@ import java.math.*;
 import java.util.regex.*;
 
 public class PassengerReg{
-
+    static Vector<Passenger> passList   =   new Vector<Passenger>();
     static int pIDGen(){
         int id=0;
         id=(int)Math. round(10000000*Math.random());
@@ -14,56 +14,76 @@ public class PassengerReg{
         return id;
     }
     static boolean validateContact(String contact){
-        if (contact.equals(" "))
-        return false;
+        if (contact.equals(" ")){
+System.out.print("Please enter the value again");
+        return false;}
         return true;
     }
     static boolean validateEmail(String email){
-        if (email.equals(" "))
-        return false;
+        if (email.equals(" ")){
+System.out.print("Please enter the value again");
+        return false;}
         return true;
     }
     static boolean validatePName(String name){
-        if (name.equals(" "))
-        return false;
+        if (name.equals(" ")){
+System.out.print("Please enter the value again");
+        return false;}
         return true;
     }
     static boolean validatePassword(String password){
-        if (password.equals(" "))
-        return false;
+        if (password.equals(" ")){
+System.out.print("Please enter the value again");
+        return false;}
         return true;
     }
     static boolean validateAddress(String address){
-        if (address.equals(" "))
-        return false;
+        if (address.equals(" ")){
+System.out.print("Please enter the value again");
+        return false;}
         return true;
     }
 
     public static void main(String[] args) {
         // System.out.println();
         Scanner sc = new Scanner(System.in);
-        int pID = pIDGen();  // // A random 7 digit number for Passenger ID with a default value
-        String pName = " ";
-        while(!validatePName(pName)) 
-            pName =sc.nextLine();
-        String email= " ";
-        while(!validateEmail(email)) 
-            email =sc.nextLine(); 
-        
-            String password = " ";
-            while(!validatePassword(password)) 
-                password = sc.nextLine();
-        String address = " ";
-        while(!validateAddress(address)) 
-            address =sc.nextLine();
-        String contact= " ";
-        while(!validateContact(contact)) 
-            contact= sc.nextLine();
-        // String contact=contactb.toString(); 
-        // 
-
-        Passenger p =new Passenger(pID, pName, email, password, address, contact);
-        System.out.println(p);
+        System.out.print("Welcome to Passenger registration wizard \n How many passengers whould you like to register");
+        int size = sc.nextInt();
+        sc.nextLine();
+        for(int i=0;i<size;i++){
+            int pID = pIDGen();  
+            // System.out.print("Welcome to Passenger registration wizard \n How many passengers whould you like to register");
+            String pName = " ";
+            do {
+                pName =sc.nextLine();
+            }while(!validatePName(pName)); 
+               
+            String email= " ";
+            do{
+                email =sc.nextLine(); 
+            }while(!validateEmail(email));
+            
+                String password = " ";
+            do{ 
+                    password = sc.nextLine();
+            }while(!validatePassword(password));
+                    
+            String address = " ";
+            do{ 
+                address =sc.nextLine();
+            }while(!validateAddress(address));
+            
+            String contact= " ";
+            do{
+                contact= sc.nextLine();
+             }while(!validateContact(contact));
+            // String contact=contactb.toString(); 
+            Passenger p =new Passenger(pID, pName, email, password, address, contact);
+            // System.out.println(p);
+            passList.add(p);
+            System.out.print("Passenger Registration is successful");
+        }
+        System.out.println(passList);
         sc.close();
     }
 
