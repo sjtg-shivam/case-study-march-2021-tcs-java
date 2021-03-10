@@ -7,13 +7,13 @@ public class Passenger{
     private String address;  // A string field to capture street, city details(Maximum 100 characters)
     private String contact; 
 
-    public Passenger(int pID, String pName, String email, String password, String address, String contact) {
-        this.pID = pID;
-        this.pName = pName;
-        this.email = email;
-        this.password = password;
-        this.address = address;
-        this.contact = contact;
+    public Passenger(int pID, String pName, String email, String password, String address, String contact) throws InvalidValueException {
+        this.setPID(pID); 
+        this.setPName(pName);
+        this.setEmail(email);
+        this.setPassword(password);
+        this.setAddress(address);
+        this.setContact(contact);
     }
 
     public int getPID() {
@@ -28,8 +28,17 @@ public class Passenger{
         return this.pName;
     }
 
-    public void setPName(String pName) {
-        this.pName = pName;
+    public void setPName(String pName)throws InvalidValueException{
+        String regex = "[A-Za-z ]{2,50}";  
+        Pattern pattern = Pattern.compile(regex);  
+        Matcher matcher = pattern.matcher(pName); 
+        if(matcher.matches()){
+
+        this.pName =pName ;
+        }
+        else {
+            throw new InvalidValueException("Name is not valid");
+        }
     }
 
     public String getEmail() {
@@ -45,7 +54,7 @@ public class Passenger{
         this.email = email;
         }
         else {
-            throw new InvalidValueException("not valid");
+            throw new InvalidValueException("Email is not valid");
         }
     }
 
@@ -53,24 +62,51 @@ public class Passenger{
         return this.password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password)throws InvalidValueException{
+        String regex = "[ A-Za-z0-9_!@#$%\\^&\\*\\(\\)\\{\\}\\[\\];':\"'/\\.,><]{4,30}";  
+        Pattern pattern = Pattern.compile(regex);  
+        Matcher matcher = pattern.matcher(password); 
+        if(matcher.matches()){
+
         this.password = password;
+        }
+        else {
+            throw new InvalidValueException("Password is not valid");
+        }
     }
 
     public String getAddress() {
         return this.address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddress(String address) throws InvalidValueException{
+        String regex = "[A-Za-z0-9,\\. ]{5,100}";  
+        Pattern pattern = Pattern.compile(regex);  
+        Matcher matcher = pattern.matcher(address); 
+        if(matcher.matches()){
+
+        this.address =address ;
+        }
+        else {
+            throw new InvalidValueException("Address is not valid");
+        }
     }
 
     public String getContact() {
         return this.contact;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setContact(String contact)throws InvalidValueException{
+        String regex = "[0-9]{10}";  
+        Pattern pattern = Pattern.compile(regex);  
+        Matcher matcher = pattern.matcher(contact); 
+        if(matcher.matches()){
+
+        this.contact =contact ;
+        }
+        else {
+            throw new InvalidValueException("Contact is not valid");
+        }
     }
 
     
