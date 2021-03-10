@@ -1,3 +1,4 @@
+import java.util.regex.*;   
 public class Passenger{
     private int pID;  // // A random 7 digit number for Passenger ID with a default value
     private String pName;  // //A string field for Passenger name(Maximum 50 characters)
@@ -35,8 +36,17 @@ public class Passenger{
         return this.email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email) throws InvalidValueException{
+        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";  
+        Pattern pattern = Pattern.compile(regex);  
+        Matcher matcher = pattern.matcher(email); 
+        if(matcher.matches()){
+
         this.email = email;
+        }
+        else {
+            throw new InvalidValueException("not valid");
+        }
     }
 
     public String getPassword() {
