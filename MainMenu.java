@@ -16,7 +16,7 @@ public class MainMenu {
         switch(sw){
         case 1 :PassengerReg.reg(sc);break;
         case 2 :Ticket_Booking.acceptBooking(sc);break;
-        case 3: ;break;
+        case 3: Connectdb.getPID();break;
         case 4: System.out.println("Good Bye!");break;
         default:System.out.println("enter the correct digit");
         }
