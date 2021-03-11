@@ -98,6 +98,7 @@ public class PassengerReg{
             // System.out.println(p);
         }while(flag);
             passList.add(p);
+            Connectdb.insertPassenger(passList);
             System.out.println("Passenger Registration is successful");
         }
         System.out.println(passList);

@@ -50,6 +50,7 @@ public class Ticket_Booking {
 		if(newBooking.checkBooking())
 		{
 			bookingList.add(newBooking);
+			Connectdb.insertBooking(bookingList);
 			System.out.println("Booking Succesfully Created");
 			System.out.println(newBooking.toString());
 			
