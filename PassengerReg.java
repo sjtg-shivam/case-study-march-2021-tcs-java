@@ -8,7 +8,18 @@ public class PassengerReg{
     static Vector<Passenger> passList   =   new Vector<Passenger>();
     static int pIDGen(){
         int id=0;
-        id=(int)Math. round(10000000*Math.random());
+        boolean f=false;
+        do{
+            f=false;
+            id=(int)Math. round(10000000*Math.random());
+            // id=1111111;
+            Vector<Integer> pidl = Connectdb.getPID();
+            for(Integer i:pidl){
+                if(i==id)
+                    f=true;
+                // System.out.println(i+" == "+id+" => "+f);
+            }
+        }while(f);
         // System.out.println(id);
         // if data base is connected we need to confirm uniqueness of id
         return id;

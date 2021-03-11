@@ -1,6 +1,7 @@
 // export CLASSPATH=/home/shivam/tcs_training/case\ study\ march\ 2021\ tcs/case\ study\ march\ 2021\ tcs\ java/mysql-connector-java-5.1.18-bin.jar:$CLASSPATH
 import java.sql.*; 
 import java.util.*;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -21,7 +22,7 @@ public class Connectdb {
         //here sonoo is database name, root is username and password  
         Statement stmt=con.createStatement();  
         
-        ResultSet rs=stmt.executeQuery("select pid from passenger");  
+        ResultSet rs=stmt.executeQuery("select pid from passenger;");  
         while(rs.next())  
         pidList.add(rs.getInt(1));  
         
@@ -48,7 +49,7 @@ public class Connectdb {
         //here sonoo is database name, root is username and password  
         Statement stmt=con.createStatement();  
         
-        ResultSet rs=stmt.executeQuery("select pnr_no from booking");  
+        ResultSet rs=stmt.executeQuery("select pnr_no from booking;");  
         while(rs.next())  
         pnrList.add(rs.getInt(1));  
         
@@ -57,9 +58,9 @@ public class Connectdb {
         catch(Exception e){
              System.out.println(e);
             }  
-        for (Integer va:pnrList){
-            System.out.println(va);
-        }
+        // for (Integer va:pnrList){
+        //     System.out.println(va);
+        // }
 
     return pidList;
     }
@@ -74,7 +75,7 @@ public class Connectdb {
         //here sonoo is database name, root is username and password  
         Statement stmt=con.createStatement();  
         
-        ResultSet rs=stmt.executeQuery("select pnr_no,travel_date, source_airport ,destination_airport,seat_preference, meal_preference from booking where pid="+String.valueOf(ipid));  
+        ResultSet rs=stmt.executeQuery("select pnr_no ,travel_date, source_airport ,destination_airport ,seat_preference, meal_preference from booking where pid="+String.valueOf(ipid));  
         ResultSetMetaData rsmd = rs.getMetaData();
         int columnsNumber = rsmd.getColumnCount();
         boolean r1=true;
@@ -85,7 +86,7 @@ public class Connectdb {
 
             System.out.print(rsmd.getColumnName(i)+"  ");
         }
-        System.out.println(" ");
+        System.out.println("  ");
         r1=false;
         for (int i = 1; i <= columnsNumber; i++) {
             
@@ -95,17 +96,11 @@ public class Connectdb {
         } 
         System.out.println(" ");
     }
-        
         con.close();  
         }
         catch(Exception e){
              System.out.println(e);
-            }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-        for (Integer va:pnrList){
-            System.out.println(va);                                                                                                                                                                                                                                                                         
         }
-
-
     }
 
     public static void insertPassenger(Vector<Passenger> pass){
@@ -118,7 +113,7 @@ public class Connectdb {
             //here sonoo is database name, root is username and password  
             Statement stmt=con.createStatement();
             for (Passenger p:pass){
-             stmt.executeUpdate("insert into passenger values("+Integer.toString(p.getPID())+", "+p.getPName()+" , "+p.getPassword()+", "+p.getEmail()+", "+p.getContact()+" )");
+             stmt.executeUpdate("insert into passenger values("+Integer.toString(p.getPID())+", '"+p.getPName()+"' , '"+p.getPassword()+"', '"+p.getEmail()+"', "+p.getContact()+" );");
              }
             con.close();  
         }
@@ -129,7 +124,7 @@ public class Connectdb {
 
     }
 
-    public static void insertBooking(Vector<Booking> book){
+    public static void insertBooking(Vector<Booking> book)throws SQLIntegrityConstraintViolationException{
         try{  
             // Class.forName("com.mysql.jdbc.Driver");  
             Class.forName ("com.mysql.jdbc.Driver");//.newInstance ();
@@ -139,7 +134,7 @@ public class Connectdb {
             //here sonoo is database name, root is username and password  
             Statement stmt=con.createStatement();
             for (Booking p:book){
-             stmt.executeUpdate("insert into booking values( "+p.getPnr()+","+p.gettravel_date()+","+p.getSource()+","+p.getDestination()+","+p.getStatus()+","+p.getSeat_prefrence()+","+p.getMeal_prefrence()+","+Integer.toString(p.getId())+");");
+             stmt.executeUpdate("insert into booking values( "+p.getPnr()+",STR_TO_DATE('"+p.gettravel_date().replace('/','-')+"', '%d-%m-%Y'),'"+p.getSource()+"','"+p.getDestination()+"','"+p.getStatus()+"','"+p.getSeat_prefrence()+"','"+p.getMeal_prefrence()+"',"+Integer.toString(p.getId())+");");
              }
             con.close();  
         }
