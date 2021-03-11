@@ -1,8 +1,8 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
+// import java.util.Scanner;
 
 public class Ticket_Booking {
-	static ArrayList<Booking> bookings = new ArrayList<Booking>();
+	static Vector<Booking> bookingList = new Vector<Booking>();
 	
 
 	public static void acceptBooking(Scanner sc )
@@ -49,7 +49,7 @@ public class Ticket_Booking {
 		Booking newBooking= new Booking(id,pnr,td,source,dest,status,sp,mp);
 		if(newBooking.checkBooking())
 		{
-			bookings.add(newBooking);
+			bookingList.add(newBooking);
 			System.out.println("Booking Succesfully Created");
 			System.out.println(newBooking.toString());
 			
