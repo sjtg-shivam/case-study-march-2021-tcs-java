@@ -15,39 +15,39 @@ public class PassengerReg{
     }
 //     static boolean validateContact(String contact){
 //         if (contact.equals(" ")){
-// System.out.print("Please enter the value again");
+// System.out.println("Please enter the value again");
 //         return false;}
 //         return true;
 //     }
 //     static boolean validateEmail(String email){
 //         if (email.equals(" ")){
-// System.out.print("Please enter the value again");
+// System.out.println("Please enter the value again");
 //         return false;}
 //         return true;
 //     }
 //     static boolean validatePName(String name){
 //         if (name.equals(" ")){
-// System.out.print("Please enter the value again");
+// System.out.println("Please enter the value again");
 //         return false;}
 //         return true;
 //     }
 //     static boolean validatePassword(String password){
 //         if (password.equals(" ")){
-// System.out.print("Please enter the value again");
+// System.out.println("Please enter the value again");
 //         return false;}
 //         return true;
 //     }
 //     static boolean validateAddress(String address){
 //         if (address.equals(" ")){
-// System.out.print("Please enter the value again");
+// System.out.println("Please enter the value again");
 //         return false;}
 //         return true;
 //     }
 
-    public static void main(String[] args) {
+    public static void reg(Scanner sc ) {
         // System.out.println();
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Welcome to Passenger registration wizard \n How many passengers whould you like to register");
+        // Scanner sc = new Scanner(System.in);
+        System.out.println("Welcome to Passenger registration wizard \n How many passengers whould you like to register");
         int size = sc.nextInt();
         sc.nextLine();
         boolean flag;
@@ -56,34 +56,34 @@ public class PassengerReg{
             int pID = pIDGen();  
             do{
                  flag=false;
-            // System.out.print("Welcome to Passenger registration wizard \n How many passengers whould you like to register");
+            // System.out.println("Welcome to Passenger registration wizard \n How many passengers whould you like to register");
             // String pName = " ";
             // do {
-                System.out.print("Please enter your name");
+                System.out.println("Please enter your name");
                 String  pName =sc.nextLine();
             // }while(!validatePName(pName)); 
                
             // String email= " ";
             // do{
-                System.out.print("Please enter your email");
+                System.out.println("Please enter your email");
                 String  email =sc.nextLine(); 
             // }while(!validateEmail(email));
             
             //     String password = " ";
             // do{ 
-                System.out.print("Please enter a password");
+                System.out.println("Please enter a password");
                 String    password = sc.nextLine();
             // }while(!validatePassword(password));
                     
             // String address = " ";
             // do{ 
-                System.out.print("Please enter your address");
+                System.out.println("Please enter your address");
               String  address =sc.nextLine();
             // }while(!validateAddress(address));
             
             // String contact= " ";
             // do{
-                System.out.print("Please enter your contact in 10 digits ");
+                System.out.println("Please enter your contact in 10 digits ");
               String  contact= sc.nextLine();
             //  }while(!validateContact(contact));
             // String contact=contactb.toString(); 
@@ -91,17 +91,17 @@ public class PassengerReg{
             p =new Passenger(pID, pName, email, password, address, contact);
             }
             catch(InvalidValueException e){
-                System.out.print(e);
-                System.out.print("fill these values again");
+                System.out.println(e);
+                System.out.println("fill these values again");
                 flag=true;
             }
             // System.out.println(p);
         }while(flag);
             passList.add(p);
-            System.out.print("Passenger Registration is successful");
+            System.out.println("Passenger Registration is successful");
         }
         System.out.println(passList);
-        sc.close();
+        // sc.close();
     }
 
 }

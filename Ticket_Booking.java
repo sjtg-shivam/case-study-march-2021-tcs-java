@@ -5,9 +5,9 @@ public class Ticket_Booking {
 	static ArrayList<Booking> bookings = new ArrayList<Booking>();
 	
 
-	public static void acceptBooking()
+	public static void acceptBooking(Scanner sc )
 	{
-		Scanner sc =new Scanner(System.in);
+		
 		System.out.println("Please Enter your Passenger ID: ");
 		int id= sc.nextInt();
 		
@@ -56,7 +56,7 @@ public class Ticket_Booking {
 		}
 		else
 			System.out.println("Booking Not Added: Invalid Details");
-		sc.close();
+		// sc.close();
 	}
 
 }
